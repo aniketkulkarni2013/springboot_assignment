@@ -10,6 +10,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.PathBuilder;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Component;
@@ -137,7 +138,7 @@ public class GenericSearchComponent {
         return null;
     }
 
-    public Iterable<Object> search(SearchCriteria searchCriteria, Pageable pageable){
+    public Page search(SearchCriteria searchCriteria, Pageable pageable){
 
         Predicate predicate = this.buildSearchPredicate(searchCriteria);
 

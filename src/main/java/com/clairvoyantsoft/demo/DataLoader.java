@@ -107,6 +107,13 @@ public class DataLoader implements CommandLineRunner {
 
         bookingRepository.save(booking);
 
+        for(int i=0;i<60;i++){
+
+            booking.setId(null);
+            bookingRepository.save(booking);
+        }
+
+
 
         Foo foo = new Foo();
         foo.setId(1l);

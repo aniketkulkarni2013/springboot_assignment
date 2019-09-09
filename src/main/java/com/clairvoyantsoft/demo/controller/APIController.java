@@ -8,6 +8,8 @@ import com.clairvoyantsoft.demo.search.GenericSearchComponent;
 import com.clairvoyantsoft.demo.search.SearchCriteria;
 import com.clairvoyantsoft.demo.service.BookingService;
 
+import com.clairvoyantsoft.demo.service.SearchAPIResultAggregator;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +28,14 @@ public class APIController {
 
     private final GenericSearchComponent genericSearchComponent;
 
+    private final SearchAPIResultAggregator searchAPIResultAggregator;
+
     public APIController(BookingService bookingService,
-                         GenericSearchComponent genericSearchComponent){
+                         GenericSearchComponent genericSearchComponent,
+                         SearchAPIResultAggregator searchAPIResultAggregator){
         this.bookingService = bookingService;
         this.genericSearchComponent = genericSearchComponent;
+        this.searchAPIResultAggregator = searchAPIResultAggregator;
     }
 
     @RequestMapping(value="/bookings", method = RequestMethod.GET)
@@ -57,9 +63,15 @@ public class APIController {
 
         System.out.println(searchCriteria.toString());
         System.out.println(pageable.toString());
-        return new ResponseEntity<>(genericSearchComponent.search(searchCriteria,pageable),HttpStatus.OK);
+        Page<Object> page=genericSearchComponent.search(searchCriteria,pageable);
+        return new ResponseEntity<>(page.getContent(),HttpStatus.OK);
     }
 
+    @GetMapping(value="/getResult")
+    public ResponseEntity<Object> getResult(){
+
+        return  new ResponseEntity<>(searchAPIResultAggregator.getResult(),HttpStatus.OK);
+    }
 
 
 

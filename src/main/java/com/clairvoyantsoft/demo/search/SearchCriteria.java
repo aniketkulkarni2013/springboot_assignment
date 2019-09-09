@@ -2,6 +2,7 @@ package com.clairvoyantsoft.demo.search;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,6 @@ public class SearchCriteria {
 
     private String entity;
 
-    List<Map<String,Object>> search;
+    List<Map<String,Object>> search = new ArrayList<>();
 
 }
