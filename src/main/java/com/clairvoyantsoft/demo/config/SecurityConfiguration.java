@@ -27,19 +27,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity()
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import(SecurityProblemSupport.class)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final TokenProvider tokenProvider;
 
     //private final CorsFilter corsFilter;
-    private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(TokenProvider tokenProvider, SecurityProblemSupport problemSupport) {
+
+    public SecurityConfiguration(TokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
-        this.problemSupport = problemSupport;
     }
 
     @Bean

@@ -23,7 +23,7 @@ public class SearchAPIResultAggregator {
     @Async
     public CompletableFuture<List<Object>> getSearchResult(int pageNumber, int pageSize, SearchCriteria criteria) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization","Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0bG9naW4iLCJhdXRoIjoiQURNSU4sVVNFUiIsImV4cCI6MTU2ODA1NjA0OX0.LaiSvf9RQ297mMsXmH79dQf2KqeUtVv4OmbDXwsHSXgLySiKrUs49SHOgET2ddzERxiDr1hZ5I4dWeukqirbNA");
+        headers.add("Authorization","Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0bG9naW4iLCJhdXRoIjoiQURNSU4sVVNFUiIsImV4cCI6MTU3Njc0MDkxMH0._2Od-ijYp0b9h0-5k9tH9eU-DIzkFFg9jU3Ol1yAooDuXv1z20bDl-Scul6zubkSFWH0tzGcAfMZMn7rDMlLuw");
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<SearchCriteria> request = new HttpEntity<SearchCriteria>(criteria, headers);
         String url = "http://localhost:8080/api/generic/search?page="+pageNumber+"&size="+pageSize+"&sort=bookingStatus";

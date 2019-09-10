@@ -27,21 +27,15 @@
 
     function getData(){
               let xhr = new XMLHttpRequest();
-
               xhr.open('GET', '/api/getResult');
               // 3. Send the request over the network
               xhr.send();
-
               // 4. This will be called after the response is received
               xhr.onload = function() {
-                if (xhr.status != 200) { // analyze HTTP status of the response
-
-                } else { // show the result
-                  alert(`Done, got ${xhr.response.length} bytes`); // responseText is the server
-                  createTableFromJSON(JSON.parse(xhr.response));
+                if (xhr.status == 200) { // analyze HTTP status of the response
+                         createTableFromJSON(JSON.parse(xhr.response));
                 }
               };
-
               xhr.onerror = function() {
                 alert("Error occured while fetching data.");
               };

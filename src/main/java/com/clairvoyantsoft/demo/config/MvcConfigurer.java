@@ -1,6 +1,9 @@
 package com.clairvoyantsoft.demo.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -48,7 +51,9 @@ public class MvcConfigurer implements WebMvcConfigurer {
 
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter =
                 new MappingJackson2HttpMessageConverter();
+        mappingJackson2HttpMessageConverter.getObjectMapper().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,false);
         mappingJackson2HttpMessageConverter.getObjectMapper().registerModule(new Hibernate5Module());
+        mappingJackson2HttpMessageConverter.getObjectMapper().registerModule( new Jdk8Module());
         converters.add(mappingJackson2HttpMessageConverter);
 
        /* MarshallingHttpMessageConverter xmlConverter =
